@@ -2,8 +2,8 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       const splash = document.getElementById("splash");
       splash.style.opacity = 0;
-      setTimeout(() => splash.style.display = "none", 1000);
-    }, 3000);
+      setTimeout(() => splash.style.display = "none", 1);
+    }, 3);
   });
 
 
@@ -75,3 +75,20 @@ window.addEventListener("load", () => {
        localStorage.setItem('theme', 'dark');
      }
    });
+
+
+  // Scroll Animation Observer
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    });
+  
+    const hiddenElements = document.querySelectorAll('.animate-on-scroll');
+    hiddenElements.forEach((el) => observer.observe(el));
+  });  

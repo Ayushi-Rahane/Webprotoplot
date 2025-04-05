@@ -82,7 +82,7 @@ header.hero p {
   font-size: 1.2rem;
 }
 header.hero.dark-mode {
-  background: url('bg_remoe.jpeg') no-repeat center center/cover;
+  background: url('bg_image.png') no-repeat center center/cover;
 }
 .btn-success {
   background-color: #2e7d32;

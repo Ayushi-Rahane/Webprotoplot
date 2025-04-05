@@ -81,6 +81,9 @@ header.hero h1 {
 header.hero p {
   font-size: 1.2rem;
 }
+header.hero.dark-mode {
+  background: url('bg_remoe.jpeg') no-repeat center center/cover;
+}
 .btn-success {
   background-color: #2e7d32;
   border: none;
@@ -139,4 +142,61 @@ header.hero p {
   display: block;
   padding: 0.5rem 0;
   font-size: 1.1rem;
+}
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .navbar.dark-mode, .navbar.bg-light.dark-mode {
+      background-color: #1e1e1e !important;
+    }
+    .navbar-brand.dark-mode, .nav-link.dark-mode {
+      color: #a5d6a7 !important;
+    }
+    .hero.dark-mode {
+      color: #ffffff;
+      background-blend-mode: darken;
+    }
+    .btn-success.dark-mode {
+      background-color: #66bb6a;
+    }
+    section.bg-light.dark-mode {
+      background-color: #1c1c1c !important;
+    }
+    footer.dark-mode {
+      background-color: #000000;
+      color: #9e9e9e;
+    }
+
+    /* Image dark filter */
+    .dark-mode img {
+      filter: brightness(0.8) contrast(1.2) grayscale(10%);
+    }
+
+    /* Toggle switch with sun/moon icon */
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.4rem;
+      margin-left: 20px;
+      transition: color 0.3s ease;
+    }
+    .theme-toggle i {
+      transition: transform 0.4s ease;
+    }
+    .theme-toggle.sun i {
+      color: #fdd835;
+    }
+    .theme-toggle.moon i {
+      transform: rotate(180deg);
+      color: #90caf9;
+    }
+
+    /* Text content dark mode styling */
+.dark-mode #DailyTracker .text-muted,
+.dark-mode #DailyTracker h4,
+.dark-mode #about .text-muted,
+.dark-mode #about h4 {
+  color: #ffffff !important;
 }

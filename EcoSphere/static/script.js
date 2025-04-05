@@ -34,3 +34,44 @@ window.addEventListener("load", () => {
     });
   });
   
+
+  /*Dark Emoji */
+
+   // Dark Mode Toggle
+   const toggleIcon = document.getElementById('themeIcon');
+   const body = document.body;
+   const elementsToToggle = document.querySelectorAll('.navbar, .navbar-brand, .nav-link, .hero, .btn-success, section.bg-light, footer');
+
+   function enableDarkMode() {
+     body.classList.add('dark-mode');
+     elementsToToggle.forEach(el => el.classList.add('dark-mode'));
+     toggleIcon.classList.remove('sun');
+     toggleIcon.classList.add('moon');
+     toggleIcon.innerHTML = '<i class="fas fa-moon"></i>';
+   }
+
+   function disableDarkMode() {
+     body.classList.remove('dark-mode');
+     elementsToToggle.forEach(el => el.classList.remove('dark-mode'));
+     toggleIcon.classList.remove('moon');
+     toggleIcon.classList.add('sun');
+     toggleIcon.innerHTML = '<i class="fas fa-sun"></i>';
+   }
+
+   // Apply saved theme
+   window.addEventListener('DOMContentLoaded', () => {
+     if (localStorage.getItem('theme') === 'dark') {
+       enableDarkMode();
+     }
+   });
+
+   // Icon click toggle
+   toggleIcon.addEventListener('click', () => {
+     if (body.classList.contains('dark-mode')) {
+       disableDarkMode();
+       localStorage.setItem('theme', 'light');
+     } else {
+       enableDarkMode();
+       localStorage.setItem('theme', 'dark');
+     }
+   });

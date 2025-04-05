@@ -114,3 +114,29 @@ header.hero p {
   text-align: center;
   padding: 20px;
 }
+
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  flex: 1 1 300px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.habits {
+  margin-bottom: 2rem;
+}
+
+.habits label {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+}

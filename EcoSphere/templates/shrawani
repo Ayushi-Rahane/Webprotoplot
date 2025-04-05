@@ -1,5 +1,4 @@
-/*dark mode toggle button */
-
+/*dark mode*/
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,13 +30,10 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      transition: background-image 0.5s ease-in-out;
     }
-    header.hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-    header.hero p {
-      font-size: 1.2rem;
+    header.hero.dark-mode {
+      background: url('bg_remoe.jpeg') no-repeat center center/cover;
     }
     .btn-success {
       background-color: #2e7d32;
@@ -51,7 +47,6 @@
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-
     #splash {
       position: fixed;
       top: 0; left: 0;
@@ -69,8 +64,6 @@
       text-align: center;
       padding: 20px;
     }
-
-    /* Dark Mode */
     body.dark-mode {
       background-color: #121212;
       color: #e0e0e0;
@@ -80,10 +73,6 @@
     }
     .navbar-brand.dark-mode, .nav-link.dark-mode {
       color: #a5d6a7 !important;
-    }
-    .hero.dark-mode {
-      color: #ffffff;
-      background-blend-mode: darken;
     }
     .btn-success.dark-mode {
       background-color: #66bb6a;
@@ -95,13 +84,9 @@
       background-color: #000000;
       color: #9e9e9e;
     }
-
-    /* Image dark filter */
     .dark-mode img {
       filter: brightness(0.8) contrast(1.2) grayscale(10%);
     }
-
-    /* Toggle switch with sun/moon icon */
     .theme-toggle {
       cursor: pointer;
       font-size: 1.4rem;
@@ -121,12 +106,9 @@
   </style>
 </head>
 <body>
-  <!-- Splash Quote -->
   <div id="splash">
     <h2>"The Earth is what we all have in common." – Wendell Berry</h2>
   </div>
-
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">🌿 Sustainable Living</a>
@@ -148,8 +130,6 @@
       </div>
     </div>
   </nav>
-
-  <!-- Hero -->
   <header class="hero">
     <div class="container">
       <h1>Track. Improve. Live Green 🌱</h1>
@@ -157,8 +137,37 @@
       <a href="#DailyTracker" class="btn btn-success btn-lg mt-3">Start Tracking</a>
     </div>
   </header>
-
-  <!-- About -->
+  <section id="DailyTracker" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-success text-center mb-4">Daily Tracker</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <label class="form-label">Mood Today</label>
+          <select class="form-select" id="mood">
+            <option>Happy</option>
+            <option>Neutral</option>
+            <option>Sad</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Hours of Sleep</label>
+          <input type="number" class="form-control" id="sleep" min="0" max="24">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Screen Time (hrs)</label>
+          <input type="number" class="form-control" id="screenTime" min="0" max="24">
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Notes</label>
+          <textarea class="form-control" id="notes" rows="3"></textarea>
+        </div>
+        <div class="col-md-12 text-center">
+          <button class="btn btn-success px-4" onclick="submitTracker()">Submit</button>
+        </div>
+      </div>
+      <div class="mt-5" id="trackerOutput"></div>
+    </div>
+  </section>
   <section id="about" class="py-5 bg-light">
     <div class="container">
       <div class="text-center mb-4">
@@ -178,15 +187,11 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
   <footer class="bg-dark text-light text-center py-3">
     <p class="mb-0">&copy; 2025 Sustainable Living Tracker. All rights reserved.</p>
   </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Splash fade out
     window.addEventListener("load", () => {
       setTimeout(() => {
         const splash = document.getElementById("splash");
@@ -194,36 +199,31 @@
         setTimeout(() => splash.style.display = "none", 1000);
       }, 3000);
     });
-
-    // Dark Mode Toggle
     const toggleIcon = document.getElementById('themeIcon');
     const body = document.body;
-    const elementsToToggle = document.querySelectorAll('.navbar, .navbar-brand, .nav-link, .hero, .btn-success, section.bg-light, footer');
-
+    const hero = document.querySelector('.hero');
+    const elementsToToggle = document.querySelectorAll('.navbar, .navbar-brand, .nav-link, .btn-success, section.bg-light, footer');
     function enableDarkMode() {
       body.classList.add('dark-mode');
+      hero.classList.add('dark-mode');
       elementsToToggle.forEach(el => el.classList.add('dark-mode'));
       toggleIcon.classList.remove('sun');
       toggleIcon.classList.add('moon');
       toggleIcon.innerHTML = '<i class="fas fa-moon"></i>';
     }
-
     function disableDarkMode() {
       body.classList.remove('dark-mode');
+      hero.classList.remove('dark-mode');
       elementsToToggle.forEach(el => el.classList.remove('dark-mode'));
       toggleIcon.classList.remove('moon');
       toggleIcon.classList.add('sun');
       toggleIcon.innerHTML = '<i class="fas fa-sun"></i>';
     }
-
-    // Apply saved theme
     window.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem('theme') === 'dark') {
         enableDarkMode();
       }
     });
-
-    // Icon click toggle
     toggleIcon.addEventListener('click', () => {
       if (body.classList.contains('dark-mode')) {
         disableDarkMode();
@@ -233,6 +233,20 @@
         localStorage.setItem('theme', 'dark');
       }
     });
+    function submitTracker() {
+      const mood = document.getElementById('mood').value;
+      const sleep = document.getElementById('sleep').value;
+      const screenTime = document.getElementById('screenTime').value;
+      const notes = document.getElementById('notes').value;
+      document.getElementById('trackerOutput').innerHTML = `
+        <h4 class="text-success">Your Daily Log</h4>
+        <ul class="list-group">
+          <li class="list-group-item">Mood: ${mood}</li>
+          <li class="list-group-item">Sleep: ${sleep} hrs</li>
+          <li class="list-group-item">Screen Time: ${screenTime} hrs</li>
+          <li class="list-group-item">Notes: ${notes}</li>
+        </ul>`;
+    }
   </script>
 </body>
 </html>

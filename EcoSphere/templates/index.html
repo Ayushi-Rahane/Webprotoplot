@@ -36,25 +36,40 @@
       </nav>
    
       </div>
-      <!--div class="main-section">
-        <div-- class="image-main-div">
-            <img class="main-image" src="{{ url_for('static', filename='main_image.jpg') }}" alt="Earth" class="img-fluid">
-            <div class="text-overlay">Welcome to EcoSphere</div>
-            <div class="quote-overlay">"The Earth is what we all have in common." – Wendell Berry</div>
-        </div-->
+      <!-- Splash Quote Page -->
+      <div id="splash">
+        <h2>"The Earth is what we all have in common." – Wendell Berry</h2>
+      </div>
         
     <!-- Hero / Landing Section -->
     </div>
     <header class="hero">
-        <div class="container">
+        <div class="container float-animation">
           <h1>Track. Improve. Live Green 🌱</h1>
           <p>Monitor your sustainability habits and make every action count for a better planet.</p>
           <a href="#DailyTracker" class="btn btn-success btn-lg mt-3">Start Tracking</a>
         </div>
       </header>
 
-    
-
+    <!-- Daily Tracker Section -->
+    <section id="DailyTracker" class="py-5 bg-light">
+        <div class="container">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-success">Daily Tracker</h2>
+            <p class="text-muted">Track your daily habits and see your progress over time.</p>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="{{ url_for('static', filename='bitmoji_tracker.jpg') }}" alt="eco-living" class="img-fluid rounded shadow-sm" />
+            </div>
+            <div class="col-md-6 ">
+              <h4 class="text-dark">Your Daily Habits</h4>
+              <p>Log your daily activities, from reducing plastic usage to saving electricity. Every action counts!</p>
+              <a href="#progress" class="btn btn-success mt-3">View Progress</a>
+            </div>
+          </div>
+        </div>
+      </section>
         
     <!-- About Section -->
     <section id="about" class="py-5 bg-light">
@@ -67,7 +82,7 @@
             <div class="col-md-6 mb-4 mb-md-0">
               <img src="{{ url_for('static', filename='bitmoji_about.jpg') }}" alt="eco-living" class="img-fluid rounded shadow-sm" />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 ">
               <h4 class="text-dark">Why Sustainable Living?</h4>
               <p>
                 Every small step counts. By tracking daily habits like reducing plastic usage, saving electricity, and recycling, we can collectively make a huge impact.
@@ -81,5 +96,8 @@
         </div>
       </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+       
+      </script>
   </body>
 </html>
